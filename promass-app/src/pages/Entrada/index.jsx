@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { postNewPost } from '../../api/posts.js';
-
 import './styles.scss';
 
 function Entrada() {
@@ -15,6 +14,10 @@ function Entrada() {
     event.target.style.height = event.target.scrollHeight + 'px';
   };
 
+  const elemTitleRef = useRef(null);
+  const elemAutorRef = useRef(null);
+  const elemDescRef = useRef(null);
+
   const guardarPost = () => {
     const fetchData = async () => {
         try {
@@ -22,6 +25,15 @@ function Entrada() {
           setTitle('')
           setDescription('')
           setAutor('')
+
+          const elemTitle = elemTitleRef.current;
+          const elemAutor = elemAutorRef.current;
+          const elemDesc = elemDescRef.current;
+
+          elemTitle.style.height = 'auto'
+          elemAutor.style.height = 'auto'
+          elemDesc.style.height = 'auto'
+
         } catch (error) {
           console.error('Error al consultar la API:', error);
         }
@@ -40,6 +52,7 @@ function Entrada() {
                   
                     <textarea
                         id='autor'
+                        ref={elemAutorRef}
                         placeholder='Autor'
                         value={autor}
                         onChange={(e) => handleChange(e, setAutor)}
@@ -49,6 +62,7 @@ function Entrada() {
                 <div className="textarea-wrapper">
                     <textarea
                         id='title'
+                        ref={elemTitleRef}
                         placeholder='Title'
                         value={titulo}
                         onChange={(e) => handleChange(e, setTitle)}
@@ -58,6 +72,7 @@ function Entrada() {
                 <div className="textarea-wrapper">
                     <textarea
                         id='description'
+                        ref={elemDescRef}
                         placeholder='Tell your story'
                         value={contenido}
                         onChange={(e) => handleChange(e, setDescription)}

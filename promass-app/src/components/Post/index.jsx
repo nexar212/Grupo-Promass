@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useEffect, useState } from 'react';
 import './styles.scss'
 import { format } from 'date-fns';
 
@@ -12,10 +12,15 @@ function Post(props) {
         FechaPublicacion
     } = props.postData;
 
+    const [randomImg, setNumeroAleatorio] = useState(1);
+    useEffect(() => {
+        const numero = Math.floor(Math.random() * 5);
+        setNumeroAleatorio(numero);
+    }, []);
+
     const { onClickVerDetalle } = props
     const formatDate =  format(FechaPublicacion, "MMM d, yyyy");
     const cutContenido = Contenido.substring(0,70) + '...';
-    const randomImg = Math.floor(Math.random() * 5);
     const arrIcons = [
         {
             url: 'https://miro.medium.com/v2/resize:fill:20:20/1*6Yc5qJmaZS2eDnw-j4moeQ.jpeg',
@@ -33,7 +38,6 @@ function Post(props) {
             url: 'https://miro.medium.com/v2/resize:fill:20:20/1*r8-YZl2YQPokMC3yGRvxwg.jpeg'
         }
     ]
-
     const arrImages = [
         {
             url: 'https://miro.medium.com/v2/da:true/resize:fill:200:134/0*-2-e2yn8nMnlC7_V'
@@ -61,8 +65,8 @@ function Post(props) {
         <div className='post-column-left'>
             <div className='post-header'>
                 <div>
-                    <a href='' rel="noopener follow">
-                        <img alt="Momentum" src={arrIcons[randomImg].url} width="20" height="20" loading="lazy"/>
+                    <a href=''>
+                        <img alt="Icono autor" src={arrIcons[randomImg].url} width="20" height="20"/>
                     </a>
                     <div>
                         <h4>
@@ -99,7 +103,7 @@ function Post(props) {
         </div>
         <div className='post-column-rigth'>
             <picture>
-                <img alt="Stagger Lee and the ‘Erasure’ of Middle-Class African Americans" src={arrImages[randomImg].url} width="200" height="134"/>    
+                <img alt="Banner" src={arrImages[randomImg].url} width="200" height="134"/>    
             </picture>
             
         </div>
