@@ -1,8 +1,25 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Prueba técnica Grupo Promass
 
-Currently, two official plugins are available:
+Ing Software Alexis Ramiro Félix Rosales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+=== Instalación ===
+
+1.- Asegúrate de tener Node.js y npm instalados en tu máquina.
+
+2.- Clona este repositorio a tu máquina local utilizando el siguiente comando:
+    git clone https://github.com/nexar212/Grupo-Promass.git
+
+3.- Navega al directorio del proyecto:
+    cd .\promass-app\
+
+4.- Instala las dependencias utilizando npm:
+    npm install
+
+=== Uso ===
+
+Una vez que hayas instalado las dependencias, puedes iniciar el servidor de desarrollo con el siguiente comando:
+    npm run dev
+
+Esto iniciará el servidor de desarrollo de Vite. Abre tu navegador y navega a http://localhost:3000 para ver la aplicación en funcionamiento.
