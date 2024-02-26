@@ -1,29 +1,28 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './pages/Home/index'
-import Listado from './pages/Listado/index'
 import Entrada from './pages/Entrada/index';
+import Detalle from './pages/Detalle/index';
 import NavBar from './components/NavBar'
 
 function App() {
 
   const [valor, setValor] = useState(1);
+  const [postData, setPostData] = useState();
 
-  // Función de devolución de llamada para recibir el valor del componente hijo
-  const handleValorCambiado = (nuevoValor) => {
+  const handleValorCambiado = (nuevoValor, data) => {
     setValor(nuevoValor);
+    setPostData(data)
   };
 
   const renderizadoComponente = () => {
     switch (valor) {
       case 1:
-        return <Home />;
+        return <Home onClickVerDetalle={handleValorCambiado}/>;
       case 2:
         return <Entrada />;
       case 3:
-        return <Listado />;
+        return <Detalle data={postData}/>;
 
       default:
         return null;

@@ -1,12 +1,19 @@
 .entrada-container {
-    margin-top: 100px;
     display: flex;
     text-align: center;
     justify-content: center;
 
-    .textarea-wrapper textarea {
-        background-color: #f0f8ff;
-        border: none;
+    .textarea-wrapper {
+        textarea {
+            background-color: #f0f8ff;
+            border: none;
+        }
+    }
+
+    #autor {
+        font-size: 25px;
+        color: #000;
+        min-width: 400px;
     }
 
     #title {
@@ -21,14 +28,20 @@
     }
 }
 
-#publica-button {
-    border-radius: 100px;
-    background: #0f730c;
-    border: none;
-    font-size: 17px;
-    padding: 2px 16px;
-    cursor: pointer;
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 100px 30px 30px 0;
+
+    #publicar-button {
+        background-color: #0f730c;
+        border-radius: 100px;
+        padding: 7px 30px;
+        border-width: 0;
+        cursor: pointer;
+    }
 }
+
 
   
 

@@ -21,16 +21,14 @@ export async function getOnePost(id) {
 
 export async function postNewPost(newPost) {
     try {
-        console.log(newPost)
-        const response = await fetch('http://localhost:3000/posts', {
+        const response = await fetch(`${urlBackend}/posts`, {
             mode:'cors',
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Especifica el tipo de contenido como JSON
+                'Content-Type': 'application/json'
               },
             body: JSON.stringify(newPost)
         });
-        // const response = await axios.post(`${urlBackend}/posts`, newPost);
         return response;
     } catch (error) {
         throw new Error('Error al guardar post');

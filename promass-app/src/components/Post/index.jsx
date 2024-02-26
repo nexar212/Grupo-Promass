@@ -12,6 +12,7 @@ function Post(props) {
         FechaPublicacion
     } = props.postData;
 
+    const { onClickVerDetalle } = props
     const formatDate =  format(FechaPublicacion, "MMM d, yyyy");
     const cutContenido = Contenido.substring(0,70) + '...';
     const randomImg = Math.floor(Math.random() * 5);
@@ -50,15 +51,18 @@ function Post(props) {
             url: 'https://miro.medium.com/v2/resize:fill:200:134/1*wPGQ4oAROhDsNVfdrN40-w.png'
         }
     ]
+    const detalleData = {
+        ...props.postData,
+        FechaPublicacion: formatDate
+    }
 
-    console.log(randomImg)
   return (
-    <div className='post' key={ID}>
+    <div className='post' key={ID} onClick={() => onClickVerDetalle(3, detalleData)}>
         <div className='post-column-left'>
             <div className='post-header'>
                 <div>
                     <a href='' rel="noopener follow">
-                        <img alt="Momentum" class="gs gv gu" src={arrIcons[randomImg].url} width="20" height="20" loading="lazy"/>
+                        <img alt="Momentum" src={arrIcons[randomImg].url} width="20" height="20" loading="lazy"/>
                     </a>
                     <div>
                         <h4>

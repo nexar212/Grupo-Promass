@@ -12,7 +12,7 @@ export default function NavBar({ onValorCambiado }) {
 
   return (
     <div>
-        <div class="navbar">
+        <div className="navbar">
             <div id='home' onClick={() => handleClick(1)}>Promasium</div>
             <div id='write' onClick={() => handleClick(2)}>
               <div>
