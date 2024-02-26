@@ -1,0 +1,37 @@
+.entrada-container {
+    margin-top: 100px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+    .textarea-wrapper textarea {
+        background-color: #f0f8ff;
+        border: none;
+    }
+
+    #title {
+        font-size: 70px;
+        color: #000;
+    }
+
+    #description {
+        font-size: 35px;
+        min-width: 780px;
+        color: rgba(0, 0, 0, 0.44);
+    }
+}
+
+#publica-button {
+    border-radius: 100px;
+    background: #0f730c;
+    border: none;
+    font-size: 17px;
+    padding: 2px 16px;
+    cursor: pointer;
+}
+
+  
+
+  
+
+
