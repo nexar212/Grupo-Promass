@@ -3,44 +3,48 @@ import { postNewPost } from '../../api/posts.js';
 import './styles.scss';
 
 function Entrada() {
-  const [titulo, setTitle] = useState('');
-  const [contenido, setDescription] = useState('');
-  const [autor, setAutor] = useState('');
+  const [inputs, setInputs] = useState({
+    titulo: '',
+    contenido: '',
+    autor: ''
+  });
 
-
-  const handleChange = (event, setState) => {
-    setState(event.target.value);
-    event.target.style.height = 'auto';
-    event.target.style.height = event.target.scrollHeight + 'px';
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setInputs(prevInputs => ({
+      ...prevInputs,
+      [name]: value
+    }));
+      event.target.style.height = 'auto';
+      event.target.style.height = event.target.scrollHeight + 'px';
   };
 
   const elemTitleRef = useRef(null);
   const elemAutorRef = useRef(null);
   const elemDescRef = useRef(null);
 
-  const guardarPost = () => {
-    const fetchData = async () => {
-        try {
-          const response = await postNewPost({Titulo: titulo, Autor: autor,Contenido: contenido});
-          setTitle('')
-          setDescription('')
-          setAutor('')
+  const adjustTextareaHeight = (textarea) => {
+    textarea.style.height = 'auto';
+  };
 
-          const elemTitle = elemTitleRef.current;
-          const elemAutor = elemAutorRef.current;
-          const elemDesc = elemDescRef.current;
+  const guardarPost = async () => {
+    try {
+      await postNewPost({Titulo: inputs.titulo, Autor: inputs.autor, Contenido : inputs.contenido});
+      setInputs({
+        titulo: '',
+        contenido: '',
+        autor: ''
+      });
 
-          elemTitle.style.height = 'auto'
-          elemAutor.style.height = 'auto'
-          elemDesc.style.height = 'auto'
+      adjustTextareaHeight(elemTitleRef.current);
+      adjustTextareaHeight(elemAutorRef.current);
+      adjustTextareaHeight(elemDescRef.current);  
 
-        } catch (error) {
-          console.error('Error al consultar la API:', error);
-        }
-      };
-  
-      fetchData();
-  }
+    } catch (error) {
+      console.error('Error al consultar la API:', error);
+    }
+}
+
   return (
     <div>
         <div className='button-container'>
@@ -52,30 +56,33 @@ function Entrada() {
                   
                     <textarea
                         id='autor'
+                        name='autor'
                         ref={elemAutorRef}
                         placeholder='Autor'
-                        value={autor}
-                        onChange={(e) => handleChange(e, setAutor)}
+                        value={inputs.autor}
+                        onChange={handleChange}
                         rows={1}
                     />
                 </div>
                 <div className="textarea-wrapper">
                     <textarea
                         id='title'
+                        name='titulo'
                         ref={elemTitleRef}
                         placeholder='Title'
-                        value={titulo}
-                        onChange={(e) => handleChange(e, setTitle)}
+                        value={inputs.titulo}
+                        onChange={handleChange}
                         rows={1}
                     />
                 </div>
                 <div className="textarea-wrapper">
                     <textarea
                         id='description'
+                        name='contenido'
                         ref={elemDescRef}
                         placeholder='Tell your story'
-                        value={contenido}
-                        onChange={(e) => handleChange(e, setDescription)}
+                        value={inputs.contenido}
+                        onChange={handleChange}
                         rows={1}
                     />
                 </div>

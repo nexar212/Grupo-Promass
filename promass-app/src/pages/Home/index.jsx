@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Post from '../../components/Post/index';
 import { getPosts } from '../../api/posts.js';
-import './styles.scss'
+import './styles.scss';
 
 function Home(props) {
     const [data, setData] = useState([]);
@@ -10,7 +10,7 @@ function Home(props) {
     const handleChange = (event) => {
         setFiltro(event.target.value);
     };
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -22,19 +22,22 @@ function Home(props) {
           };
       
           fetchData();
-      }, []);
-    
-    const {
-        onClickVerDetalle   
-    } = props
+    }, []);
 
-    const postsFiltrados = data.filter((post) => {
+    const { onClickVerDetalle } = props;
+
+    const filtrarPosts = (post) => {
+        const lowerCaseFiltro = filtro.toLowerCase();
         return (
-          post.Titulo.toLowerCase().includes(filtro.toLowerCase()) ||
-          post.Contenido.toLowerCase().includes(filtro.toLowerCase()) ||
-          post.Autor.toLowerCase().includes(filtro.toLowerCase())
+            post.Titulo.toLowerCase().includes(lowerCaseFiltro) ||
+            post.Contenido.toLowerCase().includes(lowerCaseFiltro) ||
+            post.Autor.toLowerCase().includes(lowerCaseFiltro)
         );
-      });
+    };
+
+    const postsFiltrados = useMemo(() => {
+        return data.filter(filtrarPosts);
+    }, [data, filtro]);
 
     return (
         <div>
@@ -50,11 +53,9 @@ function Home(props) {
             </div>
             <div className='home-container'>
                 <section className='posts-container'>
-                    {postsFiltrados.map( (post, index) => {
-                        return(
-                            <Post index={index} postData={post} onClickVerDetalle={onClickVerDetalle}/>
-                        )
-                    })}
+                    {postsFiltrados.map((post, index) => (
+                        <Post key={post.id} index={index} postData={post} onClickVerDetalle={onClickVerDetalle} />
+                    ))}
                 </section>
             </div>
         </div>
